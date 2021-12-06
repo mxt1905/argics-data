@@ -47,7 +47,6 @@
       require([
         'esri/Map',
         'esri/views/SceneView',
-        'esri/layers/GeoJSONLayer',
         'esri/layers/SceneLayer',
         'esri/layers/GraphicsLayer',
         'esri/Graphic',
@@ -55,13 +54,71 @@
       ], function (
         Map,
         SceneView,
-        GeoJSONLayer,
         SceneLayer,
         GraphicsLayer,
         Graphic,
         esriRequest
       ) {
-        var createGraphic = function (data) {
+        
+        var createGraphicFloor1_3 = function (data) {
+          return new Graphic({
+            geometry: data,
+            type: 'simple',
+            symbol: {
+              type: 'polygon-3d',
+              symbolLayers: [
+                {
+                  type: 'extrude',
+                  size: 22,
+                  material: {
+                    color: [248, 248, 255, 1],
+                    outline: {
+                      color: [255, 255, 255],
+                      width: 10,
+                    },
+                  },
+                },
+              ],
+            },
+          });
+        };
+
+        var createGraphicFloor4 = function (data) {
+          return new Graphic({
+            geometry: data,
+            type: 'simple',
+            symbol: {
+              type: 'polygon-3d',
+              symbolLayers: [
+                {
+                  type: 'extrude',
+                  size: 6,
+                  material: {
+                    color: [248, 248, 255, 1],
+                    outline: {
+                      color: [255, 255, 255],
+                      width: 10,
+                    },
+
+                  },
+                },
+              ],
+            },
+          });
+        };
+
+
+        var createGraphicFloor5_34_Glass = function (data) {
+          return new Graphic({
+            geometry: data,
+            symbol: data.symbol,
+            attributes: data,
+            popupTemplate: data.popupTemplate,
+            size: 20,
+          });
+        };
+
+        var createGraphicFloor5_34 = function (data) {
           return new Graphic({
             geometry: data,
             type: 'simple',
@@ -84,86 +141,6 @@
           });
         };
 
-        var createGraphicPillar = function (data) {
-          return new Graphic({
-            geometry: data,
-            type: 'simple',
-            symbol: {
-              type: 'polygon-3d',
-              symbolLayers: [
-                {
-                  type: 'extrude',
-                  size: 4.5,
-                  material: {
-                    color: [248, 248, 255, 1],
-                    outline: {
-                      color: [255, 255, 255],
-                      width: 10,
-                    },
-
-                  },
-                },
-              ],
-            },
-          });
-        };
-
-        var createGraphicRoom = function (data) {
-          return new Graphic({
-            geometry: data,
-            type: 'simple',
-            symbol: {
-              type: 'polygon-3d',
-              symbolLayers: [
-                {
-                  type: 'extrude',
-                  size: 5,
-                  material: {
-                    color: [248, 248, 255, 1],
-                    outline: {
-                      color: [255, 255, 255],
-                      width: 10,
-                    },
-                  },
-                },
-              ],
-            },
-          });
-        };
-
-        var createGraphicGlass = function (data) {
-          return new Graphic({
-            geometry: data,
-            symbol: data.symbol,
-            attributes: data,
-            popupTemplate: data.popupTemplate,
-            size: 20,
-          });
-        };
-
-        var createGraphicSole = function (data) {
-          return new Graphic({
-            geometry: data,
-            type: 'simple',
-            symbol: {
-              type: 'polygon-3d',
-              symbolLayers: [
-                {
-                  type: 'extrude',
-                  size: 12.5,
-                  material: {
-                    color: [248, 248, 255, 1],
-                    outline: {
-                      color: [255, 255, 255],
-                      width: 10,
-                    },
-                  },
-                },
-              ],
-            },
-          });
-        };
-
         const json_options = {
           query: {
             f: 'json',
@@ -171,74 +148,45 @@
           responseType: 'json',
         };
         // Vẽ nền
-        esriRequest('./data.json', json_options).then(function (response) {
+        esriRequest('./floor-5-34.json', json_options).then(function (response) {
           var graphicsLayer = new GraphicsLayer();
           console.log(response);
           response.data.forEach(function (data) {
-            graphicsLayer.add(createGraphic(data));
+            graphicsLayer.add(createGraphicFloor5_34(data));
           });
           map.add(graphicsLayer);
         });
 
-        //Vẽ cột
-        esriRequest('./data.pillar.json', json_options).then(function (response) {
+        esriRequest('./floor-1-3.json', json_options).then(function (response) {
           var graphicsLayer = new GraphicsLayer();
           console.log(response);
           response.data.forEach(function (data) {
-            graphicsLayer.add(createGraphicPillar(data));
+            graphicsLayer.add(createGraphicFloor1_3(data));
+          });
+          map.add(graphicsLayer);
+        });
+        
+        esriRequest('./floor-4.json', json_options).then(function (response) {
+          var graphicsLayer = new GraphicsLayer();
+          console.log(response);
+          response.data.forEach(function (data) {
+            graphicsLayer.add(createGraphicFloor4(data));
           });
           map.add(graphicsLayer);
         });
 
-        //Vẽ phòng
-        esriRequest('./data-room.json', json_options).then(function (response) {
-          var graphicsLayer = new GraphicsLayer();
-          console.log(response);
-          response.data.forEach(function (data) {
-            graphicsLayer.add(createGraphicRoom(data));
-          });
-          map.add(graphicsLayer);
-        });
-
-        esriRequest('./data-sole.json', json_options).then(function (response) {
-          var graphicsLayer = new GraphicsLayer();
-          console.log(response);
-          response.data.forEach(function (data) {
-            graphicsLayer.add(createGraphicSole(data));
-          });
-          map.add(graphicsLayer);
-        });
-        // Vẽ kính
-        esriRequest('./data-glass.json', json_options).then(function (
+        
+        esriRequest('./floor-5-34-glass.json', json_options).then(function (
           response
         ) {
           var graphicsLayer = new GraphicsLayer();
           console.log(response);
           response.data.forEach(function (data) {
-            graphicsLayer.add(createGraphicGlass(data));
+            graphicsLayer.add(createGraphicFloor5_34_Glass(data));
           });
           map.add(graphicsLayer);
         });
-        // geojson layer
-        const geojsonLayer = new GeoJSONLayer({
-          url: './data.geojson',
-        });
-
-        geojsonLayer.renderer = {
-          type: 'simple',
-          symbol: {
-            type: 'polygon-3d',
-            symbolLayers: [
-              {
-                type: 'extrude',
-                size: 100.0,
-                material: {
-                  color: '#7eadf7',
-                },
-              },
-            ],
-          },
-        };
+  
         const map = new Map({
           basemap: 'topo-vector',
           // ground: 'world-elevation',
