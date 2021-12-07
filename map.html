@@ -312,7 +312,7 @@
         // Vẽ nền
         
 
-        esriRequest('./entrance.json', json_options).then(function (response) {
+        esriRequest('./data/entrance.json', json_options).then(function (response) {
           var graphicsLayer = new GraphicsLayer();
           console.log(response);
           response.data.forEach(function (data) {
@@ -320,7 +320,7 @@
           });
           map.add(graphicsLayer);
         });
-        esriRequest('./entrance_top.json', json_options).then(function (response) {
+        esriRequest('./data/entrance_top.json', json_options).then(function (response) {
           var graphicsLayer = new GraphicsLayer();
           console.log(response);
           response.data.forEach(function (data) {
@@ -328,7 +328,7 @@
           });
           map.add(graphicsLayer);
         });
-        esriRequest('./entrance_columns.json', json_options).then(function (response) {
+        esriRequest('./data/entrance_columns.json', json_options).then(function (response) {
           var graphicsLayer = new GraphicsLayer();
           console.log(response);
           response.data.forEach(function (data) {
@@ -336,7 +336,7 @@
           });
           map.add(graphicsLayer);
         });
-        esriRequest('./eaves.json', json_options).then(function (response) {
+        esriRequest('./data/eaves.json', json_options).then(function (response) {
           var graphicsLayer = new GraphicsLayer();
           console.log(response);
           response.data.forEach(function (data) {
@@ -344,7 +344,7 @@
           });
           map.add(graphicsLayer);
         });
-        esriRequest('./floor_1-3.json', json_options).then(function (response) {
+        esriRequest('./data/floor_1-3.json', json_options).then(function (response) {
           var graphicsLayer = new GraphicsLayer();
           console.log(response);
           response.data.forEach(function (data) {
@@ -353,7 +353,7 @@
           map.add(graphicsLayer);
         });
 
-        esriRequest('./floor_2.json', json_options).then(function (response) {
+        esriRequest('./data/floor_2.json', json_options).then(function (response) {
           var graphicsLayer = new GraphicsLayer();
           console.log(response);
           response.data.forEach(function (data) {
@@ -361,7 +361,7 @@
           });
           map.add(graphicsLayer);
         });
-        esriRequest('./floor_1-3_roof.json', json_options).then(function (response) {
+        esriRequest('./data/floor_1-3_roof.json', json_options).then(function (response) {
           var graphicsLayer = new GraphicsLayer();
           console.log(response);
           response.data.forEach(function (data) {
@@ -370,7 +370,7 @@
           map.add(graphicsLayer);
         });
         
-        esriRequest('./floor_4.json', json_options).then(function (response) {
+        esriRequest('./data/floor_4.json', json_options).then(function (response) {
           var graphicsLayer = new GraphicsLayer();
           console.log(response);
           response.data.forEach(function (data) {
@@ -379,7 +379,7 @@
           map.add(graphicsLayer);
         });
 
-        esriRequest('./floor_4_columns.json', json_options).then(function (response) {
+        esriRequest('./data/floor_4_columns.json', json_options).then(function (response) {
           var graphicsLayer = new GraphicsLayer();
           console.log(response);
           response.data.forEach(function (data) {
@@ -388,7 +388,7 @@
           map.add(graphicsLayer);
         });
 
-        esriRequest('./floor_5_34.json', json_options).then(function (response) {
+        esriRequest('./data/floor_5_34.json', json_options).then(function (response) {
           var graphicsLayer = new GraphicsLayer();
           console.log(response);
           response.data.forEach(function (data) {
@@ -398,7 +398,7 @@
         });
 
         
-        esriRequest('./floor_5-34_glass.json', json_options).then(function (
+        esriRequest('./data/floor_5-34_glass.json', json_options).then(function (
           response
         ) {
           var graphicsLayer = new GraphicsLayer();
